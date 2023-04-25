@@ -19,7 +19,7 @@ def main():
     return render_template('aulamvc.html')
 
 @app.route('/gravar', methods=['POST','GET'])
-def formulario():
+def gravar():
     name = request.form ['nome']
     email = request.form ['email']
     senha = request.form ['senha']
