@@ -16,7 +16,7 @@ mysql.init_app(app)
 
 @app.route('/')
 def main():
-    return render_template('aulamcv.html')
+    return render_template('aulamvc.html')
 
 @app.route('/gravar', methods=['POST','GET'])
 def formulario():
