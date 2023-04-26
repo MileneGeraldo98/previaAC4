@@ -24,7 +24,11 @@ def gravar():
     email = request.form ['email']
     senha = request.form ['senha']
     print (senha)
-    cursor.execute('insert into tbl_user (user_name, user_username, user_password) VALUES (%s,%s,%s)' , (name, email,senha))
+
+    if name and email and senha:
+        conn=mysql.connect()
+        cursor= conn.cursor()
+        cursor.execute ('insert into tbl_user (user_name, user_username, user_password) VALUES (%s,%s,%s)' , (name, email,senha))
     conn.commit()
 
     return render_template('aulamvc.html')
