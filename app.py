@@ -20,6 +20,7 @@ def main():
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
+<<<<<<< HEAD
     name = request.form ['nome']
     email = request.form ['email']
     senha = request.form ['senha']
@@ -29,13 +30,28 @@ def gravar():
         cursor= cursor.execute()
         conn=mysql.connect()
         cursor.execute ('insert into tbl_user (user_name, user_username, user_password) VALUES (%s,%s,%s)' , (name, email,senha))
+=======
+  nome = request.form['nome']
+  email = request.form['email']
+  senha = request.form['senha']
+  if nome and email and senha:
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('insert into tbl_user (user_name, user_username, user_password) VALUES (%s, %s, %s)', (nome, email, senha))
+>>>>>>> 8d934a76ce11d76e9a8028d1a9cf036e97e0a2bd
     conn.commit()
+  return render_template('aulamvc.html')
 
-    return render_template('aulamvc.html')
 
+@app.route('/listar', methods=['POST','GET'])
+def listar():
+  conn = mysql.connect()
+  cursor = conn.cursor()
+  cursor.execute('select user_name, user_username, user_password from tbl_user')
+  data = cursor.fetchall()
+  conn.commit()
+  return render_template('lista.html', datas=data)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5008))
     app.run(host='0.0.0.0', port=port)
-
-
